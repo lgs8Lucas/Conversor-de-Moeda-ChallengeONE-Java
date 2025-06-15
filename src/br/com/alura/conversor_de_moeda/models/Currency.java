@@ -13,6 +13,15 @@ public class Currency {
         this.conversionRates = api.conversion_rates();
     }
 
+    public Currency(String name, String code) {
+        this.name = name;
+        this.code = code;
+    }
+
+    public void setConversionRates(CurrenciExchangeRateAPI api) {
+        this.conversionRates = api.conversion_rates();
+    }
+
     public String getName() {
         return name;
     }
