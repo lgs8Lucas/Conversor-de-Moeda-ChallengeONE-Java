@@ -24,7 +24,10 @@ public class ExchangeRateAPIRequest {
         String uri = uriBase + base_code + "/";
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(uri)).build();
         HttpResponse response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-
-        return gson.fromJson(response.body().toString(), CurrenciExchangeRateAPI.class);
+        CurrenciExchangeRateAPI res = gson.fromJson(response.body().toString(), CurrenciExchangeRateAPI.class);
+        if (res.result().contains("error")){
+            throw new IOException("Erro ao buscar moeda!");
+        }
+        return res;
     }
 }
